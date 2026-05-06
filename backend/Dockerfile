@@ -11,9 +11,9 @@ WORKDIR /app
 
 COPY . .
 
-RUN COMPOSER_ALLOW_SUPERUSER=1 composer install --no-dev --optimize-autoloader --no-interaction
+RUN COMPOSER_ALLOW_SUPERUSER=1 composer install --no-dev --optimize-autoloader --no-interaction --no-scripts
 
-RUN php artisan package:discover --ansi || true
+RUN composer dump-autoload --optimize
 
 EXPOSE 8080
 
