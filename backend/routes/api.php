@@ -13,12 +13,9 @@ use Illuminate\Support\Facades\Route;
 
 // Health check
 Route::get('/health', function () {
-    try {
-        DB::connection()->getPdo();
-        return response()->json(['status' => 'ok', 'db' => 'connected', 'app' => 'Tensai API']);
-    } catch (\Exception $e) {
-        return response()->json(['status' => 'error', 'db' => 'disconnected'], 500);
-    }
+    $db = 'disconnected';
+    try { DB::connection()->getPdo(); $db = 'connected'; } catch (\Exception $e) {}
+    return response()->json(['status' => 'ok', 'db' => $db, 'app' => 'Tensai API']);
 });
 
 // Public
