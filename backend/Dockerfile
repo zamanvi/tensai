@@ -13,6 +13,9 @@ COPY . .
 
 RUN COMPOSER_ALLOW_SUPERUSER=1 composer install --no-dev --optimize-autoloader --no-interaction --no-scripts --no-plugins
 
+RUN mkdir -p /app/bootstrap/cache /app/storage/logs /app/storage/framework/cache/data /app/storage/framework/sessions /app/storage/framework/views \
+    && chmod -R 777 /app/bootstrap/cache /app/storage
+
 EXPOSE 8080
 
 CMD php artisan serve --host=0.0.0.0 --port=${PORT:-8080}
