@@ -11,10 +11,8 @@ WORKDIR /app
 
 COPY . .
 
-RUN COMPOSER_ALLOW_SUPERUSER=1 composer install --no-dev --optimize-autoloader --no-interaction --no-scripts
-
-RUN composer dump-autoload --optimize
+RUN COMPOSER_ALLOW_SUPERUSER=1 composer install --no-dev --optimize-autoloader --no-interaction --no-scripts --no-plugins
 
 EXPOSE 8080
 
-CMD php artisan serve --host=0.0.0.0 --port=${PORT:-8080}
+CMD php artisan package:discover --ansi || true && php artisan serve --host=0.0.0.0 --port=${PORT:-8080}
