@@ -35,7 +35,7 @@ class DatabaseSeeder extends Seeder
         }
 
         // Super Admin user
-        $adminUser = User::firstOrCreate(
+        $adminUser = User::updateOrCreate(
             ['email' => 'admin@tensai.com'],
             [
                 'name' => 'Tensai Admin',
@@ -48,7 +48,7 @@ class DatabaseSeeder extends Seeder
         $adminUser->assignRole('super_admin');
 
         // Demo student
-        $student = User::firstOrCreate(
+        $student = User::updateOrCreate(
             ['email' => 'student@tensai.com'],
             [
                 'name' => 'Demo Student',
@@ -62,7 +62,7 @@ class DatabaseSeeder extends Seeder
         $student->assignRole('student');
 
         // Demo agency
-        $agency = User::firstOrCreate(
+        $agency = User::updateOrCreate(
             ['email' => 'agency@tensai.com'],
             [
                 'name' => 'Demo Agency',
