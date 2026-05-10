@@ -55,9 +55,9 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => str_replace('http://', 'https://', env('APP_URL', 'http://localhost')),
 
-    'asset_url' => env('ASSET_URL'),
+    'asset_url' => env('ASSET_URL') ? str_replace('http://', 'https://', env('ASSET_URL')) : null,
 
     /*
     |--------------------------------------------------------------------------
