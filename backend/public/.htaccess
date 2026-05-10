@@ -1,6 +1,11 @@
 # Force PHP to treat all connections as HTTPS (Railway terminates SSL at proxy)
 SetEnv HTTPS on
 
+# Tell browser to upgrade all http:// asset requests to https:// automatically
+<IfModule mod_headers.c>
+    Header always set Content-Security-Policy "upgrade-insecure-requests"
+</IfModule>
+
 <IfModule mod_rewrite.c>
     <IfModule mod_negotiation.c>
         Options -MultiViews -Indexes
