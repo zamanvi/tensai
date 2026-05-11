@@ -28,14 +28,21 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
-            ->brandName('Tensai Admin')
+            ->brandName('Tensai')
+            ->brandLogo(fn () => view('filament.brand'))
+            ->brandLogoHeight('3rem')
+            ->favicon(asset('images/tensai-logo.png'))
+            ->darkMode(true)
             ->colors([
-                'primary' => Color::Indigo,
-                'danger' => Color::Rose,
-                'success' => Color::Emerald,
-                'warning' => Color::Amber,
-                'info' => Color::Sky,
+                'primary'   => Color::hex('#3D6117'),
+                'danger'    => Color::Rose,
+                'success'   => Color::Emerald,
+                'warning'   => Color::Amber,
+                'info'      => Color::Sky,
+                'gray'      => Color::Slate,
             ])
+            ->sidebarCollapsibleOnDesktop()
+            ->sidebarWidth('16rem')
             ->navigationGroups([
                 'Lead Management',
                 'Verification',
