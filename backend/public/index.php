@@ -5,51 +5,26 @@ use Illuminate\Http\Request;
 
 define('LARAVEL_START', microtime(true));
 
-// Railway terminates SSL at the proxy — container sees HTTP. Force HTTPS server-side
-// so Laravel's Request object, URL generator, route(), asset() all produce https:// URLs.
-if (!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] !== 'on') {
-    $_SERVER['HTTPS'] = 'on';
-    $_SERVER['SERVER_PORT'] = 443;
-}
+// Railway terminates SSL at proxy — force PHP to see HTTPS
+$_SERVER['HTTPS'] = 'on';
+$_SERVER['SERVER_PORT'] = 443;
 
-/*
-|--------------------------------------------------------------------------
-| Check If The Application Is Under Maintenance
-|--------------------------------------------------------------------------
-|
-| If the application is in maintenance / demo mode via the "down" command
-| we will load this file so that any pre-rendered content can be shown
-| instead of starting the framework, which could cause an exception.
-|
-*/
+// Intercept ALL output and replace http:// app URLs with https://
+// This catches Filament asset URLs regardless of what the URL generator returns
+$_appUrl = getenv('APP_URL') ?: '';
+if ($_appUrl && str_starts_with($_appUrl, 'https://')) {
+    $_httpAppUrl = 'http://' . substr($_appUrl, 8);
+    ob_start(function ($buffer) use ($_httpAppUrl, $_appUrl) {
+        return str_replace($_httpAppUrl, $_appUrl, $buffer);
+    });
+}
+unset($_appUrl, $_httpAppUrl);
 
 if (file_exists($maintenance = __DIR__.'/../storage/framework/maintenance.php')) {
     require $maintenance;
 }
 
-/*
-|--------------------------------------------------------------------------
-| Register The Auto Loader
-|--------------------------------------------------------------------------
-|
-| Composer provides a convenient, automatically generated class loader for
-| this application. We just need to utilize it! We'll simply require it
-| into the script here so we don't need to manually load our classes.
-|
-*/
-
 require __DIR__.'/../vendor/autoload.php';
-
-/*
-|--------------------------------------------------------------------------
-| Run The Application
-|--------------------------------------------------------------------------
-|
-| Once we have the application, we can handle the incoming request using
-| the application's HTTP kernel. Then, we will send the response back
-| to this client's browser, allowing them to enjoy our application.
-|
-*/
 
 $app = require_once __DIR__.'/../bootstrap/app.php';
 
