@@ -4,13 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class GalleryItem extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'title', 'description', 'image_url',
+        'title', 'description', 'content',
+        'image_url', 'image_path',
         'category', 'is_featured', 'is_active', 'sort_order',
     ];
 
@@ -18,6 +20,16 @@ class GalleryItem extends Model
         'is_featured' => 'boolean',
         'is_active'   => 'boolean',
     ];
+
+    protected $appends = ['display_image_url'];
+
+    public function getDisplayImageUrlAttribute(): string
+    {
+        if ($this->image_path) {
+            return Storage::disk('public')->url($this->image_path);
+        }
+        return $this->image_url ?? '';
+    }
 
     public function scopeActive($query)
     {

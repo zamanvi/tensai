@@ -17,7 +17,10 @@ class GalleryController extends Controller
             $query->where('category', $request->category);
         }
 
-        return response()->json($query->get(['id', 'title', 'description', 'image_url', 'category', 'is_featured']));
+        return response()->json(
+            $query->get(['id', 'title', 'description', 'content', 'image_url', 'image_path', 'category', 'is_featured'])
+                ->map(fn ($item) => array_merge($item->toArray(), ['image_url' => $item->display_image_url]))
+        );
     }
 
     public function featured(): JsonResponse
@@ -25,8 +28,10 @@ class GalleryController extends Controller
         $items = GalleryItem::active()->featured()
             ->orderBy('sort_order')
             ->limit(6)
-            ->get(['id', 'title', 'description', 'image_url', 'category']);
+            ->get(['id', 'title', 'description', 'image_url', 'image_path', 'category']);
 
-        return response()->json($items);
+        return response()->json(
+            $items->map(fn ($item) => array_merge($item->toArray(), ['image_url' => $item->display_image_url]))
+        );
     }
 }
