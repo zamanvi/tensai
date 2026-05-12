@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\GalleryController;
 use App\Http\Controllers\Api\LeadController;
 use App\Http\Controllers\Api\StudentProfileController;
 use App\Http\Controllers\Api\AgencyController;
@@ -17,6 +18,10 @@ Route::get('/health', function () {
     try { DB::connection()->getPdo(); $db = 'connected'; } catch (\Exception $e) {}
     return response()->json(['status' => 'ok', 'db' => $db, 'app' => 'Tensai API']);
 });
+
+// Public — gallery (no auth required)
+Route::get('/gallery', [GalleryController::class, 'index']);
+Route::get('/gallery/featured', [GalleryController::class, 'featured']);
 
 // Public
 Route::middleware('throttle:5,1')->post('/auth/register', [AuthController::class, 'register']);
