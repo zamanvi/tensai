@@ -121,12 +121,16 @@ class AuthController extends Controller
     {
         $request->validate(['email' => 'required|email|exists:users,email']);
 
-        $status = Password::sendResetLink(
+        Password::sendResetLink(
             $request->only('email'),
             function (User $user, string $token) {
                 $frontend = rtrim(env('FRONTEND_URL', 'https://tensai-kappa.vercel.app'), '/');
                 $url = $frontend . '/auth/reset-password?token=' . $token . '&email=' . urlencode($user->email);
-                $user->notify(new ResetPasswordNotification($url));
+                try {
+                    $user->notify(new ResetPasswordNotification($url));
+                } catch (\Throwable $e) {
+                    \Illuminate\Support\Facades\Log::warning('Password reset mail failed: ' . $e->getMessage() . ' | Reset URL: ' . $url);
+                }
             }
         );
 
