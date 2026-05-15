@@ -7,7 +7,19 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Tensai — The Way of Global Career",
-  description: "Connect with global institutions, verify your credentials, and unlock your international career journey.",
+  description: "The Way of Global Career. Tensai connects verified students with global institutions through a transparent, fraud-proof digital ecosystem.",
+  keywords: ["global career", "study abroad", "Japan", "student visa", "agency", "Tensai"],
+  openGraph: {
+    title: "Tensai — The Way of Global Career",
+    description: "The Way of Global Career. Tensai connects verified students with global institutions through a transparent, fraud-proof digital ecosystem.",
+    siteName: "Tensai",
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "Tensai — The Way of Global Career",
+    description: "The Way of Global Career. Connect. Verify. Succeed.",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
