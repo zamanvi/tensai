@@ -12,10 +12,13 @@ class StudentProfile extends Model
     protected $fillable = [
         'user_id', 'full_name', 'full_name_japanese', 'date_of_birth',
         'gender', 'nationality', 'religion', 'address_bangladesh',
+        'street_address', 'district', 'division', 'postal_code',
+        'emergency_contact_name', 'emergency_contact_phone', 'emergency_contact_relation',
         'passport_number', 'passport_expiry', 'passport_document',
         'nid_number', 'nid_document', 'highest_qualification', 'gpa',
         'institution_name', 'passing_year', 'jlpt_level', 'nat_level',
-        'ielts_score', 'language_documents', 'is_ocr_verified', 'ocr_status',
+        'ielts_score', 'language_documents', 'is_ocr_verified',
+        'is_admin_verified', 'is_data_locked', 'ocr_status',
         'admin_notes', 'locked_at', 'locked_by',
         'phone_visible_to_institution', 'email_visible_to_institution',
     ];
