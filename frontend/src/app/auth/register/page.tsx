@@ -38,7 +38,7 @@ function RegisterForm() {
     }
     try {
       await register(form);
-      router.push(`/dashboard/${form.gateway_type}`);
+      router.push(`/auth/verify-email?email=${encodeURIComponent(form.email)}&gateway=${form.gateway_type}`);
     } catch (err: unknown) {
       const axiosErr = err as { response?: { data?: { message?: string; errors?: Record<string, string[]> } } };
       const errors = axiosErr.response?.data?.errors;

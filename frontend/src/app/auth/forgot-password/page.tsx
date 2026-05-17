@@ -32,10 +32,10 @@ export default function ForgotPasswordPage() {
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <div className="flex items-center justify-center gap-3 mb-2">
-            <Link href="/" className="text-2xl font-bold text-indigo-700">Tensai</Link>
+            <Link href="/" className="text-2xl font-bold text-green-800">Tensai</Link>
             <button
               onClick={toggle}
-              className="text-xs font-semibold px-2.5 py-1 rounded-full border border-slate-200 text-slate-600 hover:border-indigo-300 hover:text-indigo-700 transition-colors"
+              className="text-xs font-semibold px-2.5 py-1 rounded-full border border-slate-200 text-slate-600 hover:border-green-300 hover:text-green-800 transition-colors"
             >
               {lang === 'en' ? '日本語' : 'English'}
             </button>
@@ -49,7 +49,7 @@ export default function ForgotPasswordPage() {
               <div className="text-4xl mb-4">📧</div>
               <h2 className="font-bold text-slate-900 mb-2">{a.checkEmail}</h2>
               <p className="text-sm text-slate-500 mb-6">{a.checkEmailDesc}</p>
-              <Link href="/auth/login" className="text-indigo-600 font-medium hover:underline text-sm">
+              <Link href="/auth/login" className="text-green-700 font-medium hover:underline text-sm">
                 {a.backToLogin}
               </Link>
             </div>
@@ -63,17 +63,17 @@ export default function ForgotPasswordPage() {
                 <input
                   type="email" placeholder={a.emailAddress} required
                   value={email} onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
                 />
                 <button
                   type="submit" disabled={loading}
-                  className="w-full bg-indigo-600 hover:bg-indigo-700 disabled:opacity-60 text-white py-3 rounded-xl font-semibold text-sm transition-colors"
+                  className="w-full bg-green-700 hover:bg-green-800 disabled:opacity-60 text-white py-3 rounded-xl font-semibold text-sm transition-colors"
                 >
                   {loading ? a.sending : a.sendResetLink}
                 </button>
               </form>
               <p className="text-center text-sm text-slate-500 mt-5">
-                <Link href="/auth/login" className="text-indigo-600 font-medium hover:underline">{a.backToLogin}</Link>
+                <Link href="/auth/login" className="text-green-700 font-medium hover:underline">{a.backToLogin}</Link>
               </p>
             </>
           )}

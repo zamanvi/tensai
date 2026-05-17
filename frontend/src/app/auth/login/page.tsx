@@ -100,6 +100,11 @@ export default function LoginPage() {
                   </button>
                 </div>
               </div>
+              <div className="flex justify-end">
+                <Link href="/auth/forgot-password" className="text-xs text-green-700 hover:underline">
+                  {a.forgotPassword}
+                </Link>
+              </div>
               <button
                 type="submit" disabled={isLoading}
                 className="w-full bg-green-700 hover:bg-green-800 disabled:opacity-60 text-white py-3 rounded-xl font-semibold text-sm transition-colors"

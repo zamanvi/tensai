@@ -43,10 +43,10 @@ function ResetPasswordForm() {
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <div className="flex items-center justify-center gap-3 mb-2">
-            <Link href="/" className="text-2xl font-bold text-indigo-700">Tensai</Link>
+            <Link href="/" className="text-2xl font-bold text-green-800">Tensai</Link>
             <button
               onClick={toggle}
-              className="text-xs font-semibold px-2.5 py-1 rounded-full border border-slate-200 text-slate-600 hover:border-indigo-300 hover:text-indigo-700 transition-colors"
+              className="text-xs font-semibold px-2.5 py-1 rounded-full border border-slate-200 text-slate-600 hover:border-green-300 hover:text-green-800 transition-colors"
             >
               {lang === 'en' ? '日本語' : 'English'}
             </button>
@@ -70,21 +70,21 @@ function ResetPasswordForm() {
                 <input
                   type="email" placeholder={a.emailAddress} required
                   value={form.email} onChange={(e) => setForm(f => ({ ...f, email: e.target.value }))}
-                  className="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
                 />
                 <input
                   type="password" placeholder={a.newPassword} required minLength={8}
                   value={form.password} onChange={(e) => setForm(f => ({ ...f, password: e.target.value }))}
-                  className="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
                 />
                 <input
                   type="password" placeholder={a.confirmPassword} required
                   value={form.password_confirmation} onChange={(e) => setForm(f => ({ ...f, password_confirmation: e.target.value }))}
-                  className="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
                 />
                 <button
                   type="submit" disabled={loading}
-                  className="w-full bg-indigo-600 hover:bg-indigo-700 disabled:opacity-60 text-white py-3 rounded-xl font-semibold text-sm transition-colors"
+                  className="w-full bg-green-700 hover:bg-green-800 disabled:opacity-60 text-white py-3 rounded-xl font-semibold text-sm transition-colors"
                 >
                   {loading ? a.resetting : a.resetPassword}
                 </button>
