@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\InstitutionController;
 use App\Http\Controllers\Api\OcrController;
 use App\Http\Controllers\Api\InterviewController;
 use App\Http\Controllers\Api\CommissionController;
+use App\Http\Controllers\Api\GalleryController;
 use Illuminate\Support\Facades\Route;
 
 // Health check
@@ -20,6 +21,10 @@ Route::get('/health', function () {
         return response()->json(['status' => 'error', 'db' => 'disconnected'], 500);
     }
 });
+
+// Gallery (public)
+Route::get('/gallery', [GalleryController::class, 'index']);
+Route::get('/gallery/featured', [GalleryController::class, 'featured']);
 
 // Public
 Route::post('/auth/register', [AuthController::class, 'register']);
@@ -59,6 +64,9 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Institution gateway
     Route::prefix('institution')->middleware('role:institution')->group(function () {
+        Route::get('/profile', [InstitutionController::class, 'profile']);
+        Route::put('/profile', [InstitutionController::class, 'updateProfile']);
+        Route::get('/leads', [InstitutionController::class, 'myLeads']);
         Route::get('/students', [StudentProfileController::class, 'institutionBrowse']);
         Route::post('/shortlist/{student}', [StudentProfileController::class, 'shortlist']);
         Route::post('/interview-request/{lead}', [InterviewController::class, 'institutionRequest']);

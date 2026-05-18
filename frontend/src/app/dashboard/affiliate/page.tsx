@@ -34,7 +34,7 @@ export default function AffiliateDashboard() {
   const affiliateCode = user?.affiliate_code ?? '';
   const affiliateLink = typeof window !== 'undefined'
     ? `${window.location.origin}/auth/register?ref=${affiliateCode}`
-    : `https://tensai-kappa.vercel.app/auth/register?ref=${affiliateCode}`;
+    : `/auth/register?ref=${affiliateCode}`;
 
   function copyLink() {
     navigator.clipboard.writeText(affiliateLink);
